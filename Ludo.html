@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ludo Game</title>
+</head>
+<style>
+.red,.green,.yellow,.blue{
+    border: 1px solid black;
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    top: 0;
+    border-radius: 100%;
+    box-shadow: 1px 1px 5px;
+    transition: all 1s;
+}
+.red{
+    background-color: red;
+    left: 353px;
+    top: 73px;
+    /* box-shadow: 0 0 26px red,0 0 26px red; */
+    animation-name: example;
+    animation-duration: 3s;  
+    animation-delay: 2s;
+    animation-fill-mode: both;
+}
+.red1{
+   left:443px;
+    top: 73px;
+}
+.red2{
+    left: 353px;
+    top: 133px;
+}
+.red3{
+    top: 133px;
+    left:442px;
+}
+
+
+
+.green{
+    background-color: green;
+    left: 832px;
+    top: 72px;
+}
+
+.green1{
+    left: 932px;
+}
+.green2{
+    top: 132px;
+}
+.green3{
+    left: 932px;
+    top: 132px;
+}
+
+.yellow{
+background-color: yellow;
+left: 932px;
+top: 463px;
+}
+.yellow1{
+    left: 933px;
+    top: 533px;
+}
+.yellow2{
+    left: 833px;
+    top: 533px;
+}
+.yellow3{
+    left: 833px;
+    top: 463px;
+}
+
+.blue{
+background-color:blue;
+left: 352px;
+top: 462px;
+}
+.blue1{
+left: 443px;
+top: 462px;
+}
+.blue2{
+left: 443px;
+top: 533px;
+}
+.blue3{
+left: 352px;
+top: 533px;
+}
+
+.LudoButton{
+border: 1px solid black;
+height: 50px;
+width: 100px;
+color: wheat;
+font-size: larger;
+font-family:'Courier New', Courier, monospace;
+font-weight: 900;
+box-shadow: 5px 5px 5px black;
+cursor: pointer;
+position: absolute;
+}
+
+.button1{
+left: 80px;
+top: 200px;    
+background-color: red;
+}
+
+.button2{
+left: 80px;
+top: 500px;    
+background-color: blue;
+}
+
+.button3{
+left: 1100px;
+top: 200px;    
+background-color: green;
+}
+
+.button4{
+left: 1100px;
+top: 500px;    
+background-color: yellow;
+}
+
+.star{
+height: 40px;
+position: absolute;
+}
+.star1{
+left: 570px;
+top: 85px;
+z-index: -1;
+}
+.star3{
+    left: 914px;
+    top: 235px;
+    z-index: -1;
+}
+
+.star4{
+    left: 690px;
+    top: 488px;
+    z-index: -1;
+}
+.star5{
+    left: 375px;
+    top: 340px;
+    z-index: -1;
+}
+.dis_num{
+    border:1px solid black;
+    height: 100px;
+    width: 160px;
+    position: absolute;
+    background-color:tan;
+    font-size: 60px;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+
+}
+
+.dis1{
+    left: 60px;
+    top: 80px;
+}
+.dis3{
+    left: 1080px;
+    top: 80px;
+}
+.dis2{
+    left: 60px;
+    top: 380px;
+}
+.dis4{
+    left: 1080px;
+    top: 380px;
+}
+
+
+</style>
+<body onload="UserTurn('red')">
+    <canvas id="Ludo" height="620" width="770" style="border: 1px solid black; margin-left: 270px;"></canvas>
+    
+    <div class="whole_red">
+    <div class="red red1 1" accessKey=''></div>
+    <div class="red red2 2" accessKey=''></div>
+    <div class="red red3 3" accessKey=''></div>
+    <div class="red red4 4" accessKey=''></div>
+    </div>
+
+    <div class="whole_green">
+    <div class="green green1 1" accessKey=''></div>
+    <div class="green green2 2" accessKey=''></div>
+    <div class="green green3 3" accessKey=''></div>
+    <div class="green green4 4" accessKey=''></div>
+    </div>
+
+    <div class="whole_yellow">
+    <div class="yellow yellow1 1" accessKey=''></div>
+    <div class="yellow yellow2 2" accessKey=''></div>
+    <div class="yellow yellow3 3" accessKey=''></div>
+    <div class="yellow yellow4 4" accessKey=''></div>
+    </div>
+
+    <div class="whole_blue">
+    <div class="blue blue1 1" accessKey=''></div>
+    <div class="blue blue2 2" accessKey=''></div>
+    <div class="blue blue3 3" accessKey=''></div>
+    <div class="blue blue4 4" accessKey=''></div>
+   </div>
+
+     <div class="whole_button">
+     <input type="button" class="LudoButton button1" name="red" value="Click">
+     <input type="button" class="LudoButton button2" name="blue" value="Click">
+     <input type="button" class="LudoButton button3" name="green" value="Click">
+     <input type="button" class="LudoButton button4" name="yellow" value="Click">
+    </div>
+
+     <div class="dis_num dis1" id="button1" name="red"></div>
+     <div class="dis_num dis2" id="button2" name="blue"></div>
+     <div class="dis_num dis3" id="button3" name="green"></div>
+     <div class="dis_num dis4" id="button4" name="yellow"></div>
+
+     <img src="./Star.png" class="star star1">
+     <!-- <img src="./Star.png" class="star star2"> -->
+     <img src="./Star.png" class="star star3">
+     <img src="./Star.png" class="star star4">
+     <img src="./Star.png" class="star star5">
+
+
+
+
+</body>
+<script>
+   const Ludo=document.getElementById('Ludo').getContext('2d');
+   Ludo.beginPath();
+   Ludo.lineWidth='50';
+   Ludo.strokeStyle='red';
+   Ludo.moveTo(0,25);
+   Ludo.lineTo(280,25)
+   Ludo.moveTo(25,0);
+   Ludo.lineTo(25,200);
+   Ludo.moveTo(0,200);
+   Ludo.lineTo(280,200);
+   Ludo.moveTo(255,200);
+   Ludo.lineTo(255,25);
+
+   Ludo.stroke();
+
+   Ludo.beginPath();
+   Ludo.lineWidth='50';
+   Ludo.strokeStyle='Blue';
+   Ludo.moveTo(0,600);
+   Ludo.lineTo(280,600);
+   Ludo.moveTo(25,600);
+   Ludo.lineTo(25,400);
+   Ludo.moveTo(0,400);
+   Ludo.lineTo(280,400);
+   Ludo.moveTo(255,400);
+   Ludo.lineTo(255,620);
+   Ludo.stroke();
+
+
+   Ludo.beginPath();
+   Ludo.moveTo(280,225);
+   Ludo.lineTo(470,225);
+   Ludo.moveTo(280,375);
+   Ludo.lineTo(280,225);
+   Ludo.moveTo(470,375);
+   Ludo.lineTo(470,225);
+   Ludo.moveTo(280,375);
+   Ludo.lineTo(470,375);
+   Ludo.strokeStyle='black';
+   Ludo.lineWidth='1';
+   Ludo.stroke();
+   
+   Ludo.beginPath();
+   Ludo.moveTo(280,225);
+   Ludo.lineTo(375,300);
+   Ludo.lineTo(470,225);
+   Ludo.fillStyle = "green";
+   Ludo.fill();
+   
+   Ludo.beginPath();
+   Ludo.moveTo(280,225);
+   Ludo.lineTo(375,300);
+   Ludo.lineTo(280,375);
+   Ludo.fillStyle ="red";
+   Ludo.fill();
+   
+   Ludo.beginPath();
+   Ludo.moveTo(280,375);
+   Ludo.lineTo(375,300);
+   Ludo.lineTo(470,375);
+   Ludo.fillStyle ="blue";
+   Ludo.fill();
+
+   Ludo.beginPath();
+   Ludo.moveTo(470,225);
+   Ludo.lineTo(375,300);
+   Ludo.lineTo(470,375);
+   Ludo.fillStyle ="yellow";
+   Ludo.fill();
+
+
+   Ludo.beginPath();
+   Ludo.lineWidth='50';
+   Ludo.strokeStyle='green';
+   Ludo.moveTo(470,25);
+   Ludo.lineTo(800,25)
+   Ludo.moveTo(495,0);
+   Ludo.lineTo(495,225);
+   Ludo.moveTo(470,200);
+   Ludo.lineTo(800,200);
+   Ludo.moveTo(745,200);
+   Ludo.lineTo(745,25);
+
+   Ludo.stroke();
+
+   Ludo.beginPath();
+   Ludo.lineWidth='50';
+   Ludo.strokeStyle='yellow';
+   Ludo.moveTo(470,400);
+   Ludo.lineTo(770,400)
+   Ludo.moveTo(495,770);
+   Ludo.lineTo(495,375);
+   Ludo.moveTo(470,600);
+   Ludo.lineTo(770,600);
+   Ludo.moveTo(745,600);
+   Ludo.lineTo(745,375);
+   Ludo.stroke();
+
+   Ludo.beginPath();
+   Ludo.moveTo(45,225);
+   Ludo.lineTo(90,225);
+   Ludo.lineTo(90,275);
+   Ludo.lineTo(280,275);
+   Ludo.lineTo(280,325);
+   Ludo.lineTo(45,325);
+   Ludo.lineTo(45,225);
+   Ludo.fillStyle ="red";
+   Ludo.fill(); 
+
+   Ludo.beginPath();
+   Ludo.lineWidth='1';
+   Ludo.strokeStyle='black'
+   Ludo.moveTo(0,275);
+   Ludo.lineTo(280,275);
+   Ludo.lineTo(280,325);
+   Ludo.lineTo(0,325);
+   Ludo.stroke();
+
+   Ludo.beginPath();
+   Ludo.lineWidth='1';
+   Ludo.strokeStyle='black';
+   Ludo.moveTo(45,375);
+   Ludo.lineTo(45,225);
+   Ludo.lineTo(90,225);
+   Ludo.lineTo(90,375);
+   Ludo.lineTo(140,375);
+   Ludo.lineTo(140,225);
+   Ludo.lineTo(187,225);
+   Ludo.lineTo(187,375);
+   Ludo.lineTo(235,375);
+   Ludo.lineTo(235,225);
+   Ludo.stroke();    
+
+//green one
+   Ludo.beginPath();
+   Ludo.moveTo(350,40);
+   Ludo.lineTo(350,225);
+   Ludo.lineTo(400,225);
+   Ludo.lineTo(400,80);
+   Ludo.lineTo(470,80);
+   Ludo.lineTo(470,40);
+   Ludo.lineTo(350,40);
+   Ludo.fillStyle ="green";
+   Ludo.fill(); 
+
+   Ludo.beginPath();
+   Ludo.lineWidth='1';
+   Ludo.strokeStyle='black'
+   Ludo.moveTo(350,0);
+   Ludo.lineTo(350,225);
+   Ludo.lineTo(400,225);
+   Ludo.lineTo(400,0);
+   Ludo.stroke();
+
+   Ludo.beginPath();
+   Ludo.lineWidth='1';
+   Ludo.strokeStyle='black';
+   Ludo.moveTo(280,40);
+   Ludo.lineTo(470,40);
+   Ludo.lineTo(470,80);
+   Ludo.lineTo(280,80);
+   Ludo.lineTo(280,115);
+   Ludo.lineTo(470,115);
+   Ludo.lineTo(470,150);
+   Ludo.lineTo(280,150);
+   Ludo.lineTo(280,190);
+   Ludo.lineTo(470,190);
+   Ludo.stroke();  
+
+   //yellow one
+
+   Ludo.beginPath();
+   Ludo.moveTo(720,270);
+   Ludo.lineTo(470,270);
+   Ludo.lineTo(470,310);
+   Ludo.lineTo(680,310);
+   Ludo.lineTo(680,375);
+   Ludo.lineTo(720,375);
+   Ludo.lineTo(720,270);
+   Ludo.fillStyle ="yellow";
+   Ludo.fill();
+
+   Ludo.beginPath();
+   Ludo.lineWidth='1';
+   Ludo.strokeStyle='black'
+   Ludo.moveTo(770,270);
+   Ludo.lineTo(470,270);
+   Ludo.lineTo(470,310);
+   Ludo.lineTo(770,310);
+   Ludo.stroke();
+
+   Ludo.beginPath();
+   Ludo.lineWidth='1';
+   Ludo.strokeStyle='black';
+   Ludo.moveTo(720,225);
+   Ludo.lineTo(720,375);
+   Ludo.lineTo(680,375);
+   Ludo.lineTo(680,225);
+   Ludo.lineTo(630,225);
+   Ludo.lineTo(630,375);
+   Ludo.lineTo(580,375);
+   Ludo.lineTo(580,225);
+   Ludo.lineTo(530,225);
+   Ludo.lineTo(530,375);
+   Ludo.lineTo(470,375);
+   Ludo.lineTo(470,225);
+
+   Ludo.stroke(); 
+
+   //blue one
+   Ludo.beginPath();
+   Ludo.moveTo(335,520);
+   Ludo.lineTo(335,375);
+   Ludo.lineTo(390,375);
+   Ludo.lineTo(390,575);
+   Ludo.lineTo(280,575);
+   Ludo.lineTo(280,520);
+   Ludo.lineTo(335,520);
+   Ludo.fillStyle ="blue";
+   Ludo.fill();
+
+   Ludo.beginPath();
+   Ludo.lineWidth='1';
+   Ludo.strokeStyle='black'
+   Ludo.moveTo(390,625);
+   Ludo.lineTo(390,373);
+   Ludo.lineTo(335,373);
+   Ludo.lineTo(335,625);
+   Ludo.stroke();
+
+   Ludo.beginPath();
+   Ludo.lineWidth='1';
+   Ludo.strokeStyle='black';
+   Ludo.moveTo(470,575);
+   Ludo.lineTo(280,575);
+   Ludo.lineTo(280,520);
+   Ludo.lineTo(470,520);
+   Ludo.lineTo(470,480);
+   Ludo.lineTo(280,480);
+   Ludo.lineTo(280,440);
+   Ludo.lineTo(470,440);
+   Ludo.lineTo(470,405);
+   Ludo.lineTo(280,405);
+   Ludo.lineTo(280,375);
+   Ludo.lineTo(470,375);
+   Ludo.stroke();
+
+   Ludo.beginPath();
+   Ludo.moveTo(280,0);
+   Ludo.lineTo(280,620);   
+   Ludo.stroke(); 
+
+   Ludo.beginPath();
+   Ludo.moveTo(470,0);
+   Ludo.lineTo(470,620);   
+   Ludo.stroke();
+
+   Ludo.beginPath();
+   Ludo.moveTo(0,225);
+   Ludo.lineTo(770,225);   
+   Ludo.stroke();
+
+   Ludo.beginPath();
+   Ludo.moveTo(0,375);
+   Ludo.lineTo(770,375);   
+   Ludo.stroke();
+
+    var radius=20;
+    
+    Ludo.beginPath();
+    Ludo.arc(90, 80, radius, 0, 2 * Math.PI);
+    Ludo.strokeStyle ='red';
+    Ludo.lineWidth = 3;
+    Ludo.stroke();
+
+    Ludo.beginPath();
+    Ludo.arc(180, 80, radius, 0, 2 * Math.PI);
+    Ludo.strokeStyle ='red';
+    Ludo.lineWidth = 3;
+    Ludo.stroke();
+
+    Ludo.beginPath();
+    Ludo.arc(180, 140, radius, 0, 2 * Math.PI);
+    Ludo.strokeStyle ='red';
+    Ludo.lineWidth = 3;
+    Ludo.stroke();
+
+    Ludo.beginPath();
+    Ludo.arc(90, 140, radius, 0, 2 * Math.PI);
+    Ludo.strokeStyle ='red';
+    Ludo.lineWidth = 3;
+    Ludo.stroke();
+
+    // blue circle
+    Ludo.beginPath();
+    Ludo.arc(90, 540, radius, 0, 2 * Math.PI);
+    Ludo.strokeStyle ='blue';
+    Ludo.lineWidth = 3;
+    Ludo.stroke();
+
+    Ludo.beginPath();
+    Ludo.arc(90, 470, radius, 0, 2 * Math.PI);
+    Ludo.strokeStyle ='blue';
+    Ludo.lineWidth = 3;
+    Ludo.stroke();
+
+    Ludo.beginPath();
+    Ludo.arc(180, 470, radius, 0, 2 * Math.PI);
+    Ludo.strokeStyle ='blue';
+    Ludo.lineWidth = 3;
+    Ludo.stroke();
+
+    Ludo.beginPath();
+    Ludo.arc(180, 540, radius, 0, 2 * Math.PI);
+    Ludo.strokeStyle ='blue';
+    Ludo.lineWidth = 3;
+    Ludo.stroke();
+
+    //yellow
+    Ludo.beginPath();
+    Ludo.arc(570, 540, radius, 0, 2 * Math.PI);
+    Ludo.strokeStyle ='yellow';
+    Ludo.lineWidth = 3;
+    Ludo.stroke();
+
+    Ludo.beginPath();
+    Ludo.arc(570, 470, radius, 0, 2 * Math.PI);
+    Ludo.strokeStyle ='yellow';
+    Ludo.lineWidth = 3;
+    Ludo.stroke();
+
+    Ludo.beginPath();
+    Ludo.arc(670, 540, radius, 0, 2 * Math.PI);
+    Ludo.strokeStyle ='yellow';
+    Ludo.lineWidth = 3;
+    Ludo.stroke();
+
+    Ludo.beginPath();
+    Ludo.arc(670, 470, radius, 0, 2 * Math.PI);
+    Ludo.strokeStyle ='yellow';
+    Ludo.lineWidth = 3;
+    Ludo.stroke();
+
+//green
+
+    Ludo.beginPath();
+    Ludo.arc(570, 80, radius, 0, 2 * Math.PI);
+    Ludo.strokeStyle ='green';
+    Ludo.lineWidth = 3;
+    Ludo.stroke();
+
+    Ludo.beginPath();
+    Ludo.arc(570, 140, radius, 0, 2 * Math.PI);
+    Ludo.strokeStyle ='green';
+    Ludo.lineWidth = 3;
+    Ludo.stroke();
+
+    Ludo.beginPath();
+    Ludo.arc(670, 140, radius, 0, 2 * Math.PI);
+    Ludo.strokeStyle ='green';
+    Ludo.lineWidth = 3;
+    Ludo.stroke();
+
+    Ludo.beginPath();
+    Ludo.arc(670, 80, radius, 0, 2 * Math.PI);
+    Ludo.strokeStyle ='green';
+    Ludo.lineWidth = 3;
+    Ludo.stroke();
+
+
+
+
+</script>
+<script src="Ludo.js"></script>
+</html>
